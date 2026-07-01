@@ -1,0 +1,59 @@
+version: '3.9'
+
+services:
+
+  postgres:
+    image: postgres:15
+    platform: linux/amd64
+    container_name: tech_challenge_db
+    restart: always
+
+    environment:
+      POSTGRES_DB: tech_challenge
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d tech_challenge"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+    networks:
+      - tech_challenge_network
+
+  java:
+    build: .
+    platform: linux/amd64
+    container_name: tech_challenge_app
+    restart: always
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/tech_challenge
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+
+    ports:
+      - "8080:8080"
+
+    networks:
+      - tech_challenge_network
+
+volumes:
+  postgres_data:
+
+networks:
+  tech_challenge_network:
+    driver: bridge
+    name: tech_challenge_network
