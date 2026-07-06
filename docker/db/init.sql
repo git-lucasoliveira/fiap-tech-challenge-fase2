@@ -102,3 +102,7 @@ CREATE INDEX idx_avaliacao_cliente ON avaliacao(cliente_id);
 CREATE INDEX idx_avaliacao_restaurante ON avaliacao(restaurante_id);
 
 CREATE INDEX idx_endereco_cidade ON endereco(cidade);
+
+--insere tipos de usuário
+INSERT INTO tipo_usuario (nome) VALUES ('Cliente');
+INSERT INTO tipo_usuario (nome) VALUES ('Dono de Restaurante');
