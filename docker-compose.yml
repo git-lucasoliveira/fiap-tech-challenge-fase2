@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
 
   postgres:
@@ -21,7 +19,7 @@ services:
       - ./docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d tech_challenge"]
+      test: [ "CMD-SHELL", "pg_isready -U admin -d tech_challenge" ]
       interval: 5s
       timeout: 3s
       retries: 10
