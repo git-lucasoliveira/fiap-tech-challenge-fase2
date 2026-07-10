@@ -6,6 +6,7 @@ import com.fiap.techchallenge.application.dto.UpdateRestauranteCommand;
 import com.fiap.techchallenge.domain.exception.ResourceNotFoundException;
 import com.fiap.techchallenge.domain.model.Restaurante;
 import com.fiap.techchallenge.domain.repository.RestauranteRepository;
+import com.fiap.techchallenge.domain.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,13 +16,16 @@ import java.util.List;
 public class RestauranteService {
 
     private final RestauranteRepository restauranteRepository;
+    private final UserRepository userRepository;
 
-    public RestauranteService(RestauranteRepository restauranteRepository) {
+    public RestauranteService(RestauranteRepository restauranteRepository, UserRepository userRepository) {
         this.restauranteRepository = restauranteRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
     public RestauranteView criar(CreateRestauranteCommand command) {
+        validarDono(command.donoId());
         Restaurante restaurante = new Restaurante(null, command.nome(), command.tipoCozinha(),
                 command.horarioFuncionamento(), command.donoId(), command.enderecoId());
         return toView(restauranteRepository.save(restaurante));
@@ -48,6 +52,7 @@ public class RestauranteService {
     public RestauranteView atualizar(Long id, UpdateRestauranteCommand command) {
         restauranteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Restaurante", id));
+        validarDono(command.donoId());
         Restaurante atualizado = new Restaurante(id, command.nome(), command.tipoCozinha(),
                 command.horarioFuncionamento(), command.donoId(), command.enderecoId());
         return toView(restauranteRepository.save(atualizado));
@@ -58,6 +63,11 @@ public class RestauranteService {
         restauranteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Restaurante", id));
         restauranteRepository.deleteById(id);
+    }
+
+    private void validarDono(Long donoId) {
+        userRepository.findById(donoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário", donoId));
     }
 
     private RestauranteView toView(Restaurante r) {
