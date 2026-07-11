@@ -136,6 +136,29 @@ Também é possível acessar a especificação OpenAPI em formato JSON:
 http://localhost:8080/v3/api-docs
 ```
 
+## Atualizar collection do Postman com base no contrato
+
+Com a aplicacao rodando, gere ou atualize a collection a partir do OpenAPI:
+
+```powershell
+cd "C:\[CAMINHO DO PATH DA SUA APP]\FIAP\Project\fiap-tech-challenge-fase2"
+.\update-postman-collection.ps1
+```
+
+O script:
+
+- baixa o contrato em `target/openapi.json`
+- gera a collection com `openapi-generator`
+- atualiza `collections/FIAP-Tech-Challenge.postman_collection.json`
+- cria backup automatico da collection anterior
+
+Para validar o fluxo sem alterar arquivos:
+
+```powershell
+cd "C:\[CAMINHO DO PATH DA SUA APP]\Project\fiap-tech-challenge-fase2"
+.\update-postman-collection.ps1 -DryRun
+```
+
 No Swagger estão documentados os seguintes grupos de endpoints:
 
 - Usuários
