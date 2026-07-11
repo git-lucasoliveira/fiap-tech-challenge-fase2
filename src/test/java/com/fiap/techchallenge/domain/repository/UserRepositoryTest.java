@@ -6,39 +6,26 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import static com.fiap.techchallenge.utils.UtilsUserTest.getUser;
+import static com.fiap.techchallenge.utils.UtilsUserTest.getUserList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class UserRepositoryTest {
 
     @Mock
     private UserRepository userRepository;
-
-    AutoCloseable mock;
-
-    @BeforeEach
-    void setUp() {
-        mock = MockitoAnnotations.openMocks(this);
-    }
-
-    @AfterEach
-    void tearDown() throws Exception {
-        mock.close();
-    }
 
     @Test
     void testSaveUser() {
@@ -99,31 +86,4 @@ public class UserRepositoryTest {
 
     }
 
-    public User getUser() {
-        return new User(
-                1L,
-                "joana",
-                "joana@gmail.com",
-                "joana123",
-                "123456",
-                1L,
-                1L,
-                LocalDateTime.now()
-        );
-    }
-
-    public List<User> getUserList(){
-        return List.of(
-                new User(
-                        1L,
-                        "joana",
-                        "joana@gmail.com",
-                        "joana123",
-                        "123456",
-                        1L,
-                        1L,
-                        LocalDateTime.now()
-                )
-        );
-    }
 }

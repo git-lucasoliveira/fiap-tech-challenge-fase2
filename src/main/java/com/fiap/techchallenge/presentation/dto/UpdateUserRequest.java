@@ -4,7 +4,8 @@ import jakarta.validation.constraints.Email;
 
 public record UpdateUserRequest(
         String nome,
-        @Email String email,
+        @Email
+        String email,
         String login,
         String senha,
         Long fkTipoUsuario,
