@@ -168,6 +168,22 @@ No Swagger estão documentados os seguintes grupos de endpoints:
 - Health Check
 - Itens do Cardápio
 
+## Testes
+
+O projeto possui testes unitários e testes de integração.
+
+Os testes de integração exercitam os endpoints de ponta a ponta, passando por
+controllers, services, persistência JPA e banco de dados. Eles utilizam
+**Testcontainers** para subir um container PostgreSQL, garantindo que os testes rodem
+contra o mesmo banco usado em produção. Por isso é necessário ter o **Docker em
+execução** na máquina.
+
+Para executar os testes:
+
+```bash
+mvn test
+```
+
 ## Rodando localmente
 
 Para compilar o projeto:
