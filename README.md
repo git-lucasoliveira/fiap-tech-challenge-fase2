@@ -375,6 +375,30 @@ O script de criação inicial do banco está em:
 docker/db/init.sql
 ```
 
+## Testes automatizados
+
+O projeto possui testes unitários e testes de integração.
+
+Os testes estão organizados em `src/test` e contemplam services, repositories, adapters, controllers e testes de integração.
+
+Os testes de integração exercitam os endpoints de ponta a ponta, passando por controllers, services, persistência JPA e banco de dados. Eles utilizam **Testcontainers** para subir um container PostgreSQL, garantindo que os testes rodem contra um banco semelhante ao usado pela aplicação.
+
+Por isso, para executar os testes de integração, é necessário que o **Docker esteja em execução** na máquina.
+
+Para executar os testes:
+
+```bash
+mvn test
+```
+
+Para executar o build completo com testes:
+
+```bash
+mvn clean install
+```
+
+```
+
 ## Rodando localmente
 
 ### Pré-requisitos
