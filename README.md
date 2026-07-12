@@ -1,6 +1,6 @@
 # FIAP Tech Challenge - Fase 2
 
-Projeto desenvolvido para o **Tech Challenge - Fase 2 da FIAP**, pela equipe 21, utilizando **Java 21**, **Spring Boot** e uma a arquitetura baseada em **Clean Architecture**.
+Projeto desenvolvido para o **Tech Challenge - Fase 2 da FIAP**, utilizando **Java 21**, **Spring Boot** e uma a arquitetura baseada em **Clean Architecture**.
 
 A aplicação é uma API REST para gestão de restaurantes, permitindo o cadastro, o gerenciamento de usuários, tipos de usuário, endereços, restaurantes e itens do cardápio.
 
