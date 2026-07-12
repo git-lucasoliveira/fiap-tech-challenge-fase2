@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -45,7 +46,9 @@ class UserIntegrationTest extends IntegrationTestBase {
                 .andExpect(jsonPath("$.login").value("joao.crud"));
 
         mockMvc.perform(get("/api/users"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].login").value("joao.crud"));
 
         String payload = """
                 {
@@ -84,6 +87,27 @@ class UserIntegrationTest extends IntegrationTestBase {
                 """;
 
         mockMvc.perform(post("/api/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(payload))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void deveRetornar404AoAtualizarUsuarioComTipoInexistente() throws Exception {
+        long tipoId = criarTipoUsuario("Cliente Update");
+        long usuarioId = criarUsuario("Lucas", "lucas@fiap.com", "lucas.update", tipoId);
+
+        String payload = """
+                {
+                  "nome": "Lucas",
+                  "email": "lucas@fiap.com",
+                  "login": "lucas.update",
+                  "senha": "senha123",
+                  "fkTipoUsuario": 999999
+                }
+                """;
+
+        mockMvc.perform(put("/api/users/{id}", usuarioId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(payload))
                 .andExpect(status().isNotFound());

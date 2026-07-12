@@ -1,6 +1,12 @@
 package com.fiap.techchallenge;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fiap.techchallenge.infrastructure.persistence.repository.SpringDataEnderecoRepository;
+import com.fiap.techchallenge.infrastructure.persistence.repository.SpringDataItemCardapioRepository;
+import com.fiap.techchallenge.infrastructure.persistence.repository.SpringDataRestauranteRepository;
+import com.fiap.techchallenge.infrastructure.persistence.repository.SpringDataTipoUsuarioRepository;
+import com.fiap.techchallenge.infrastructure.persistence.repository.SpringDataUserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,7 +14,6 @@ import org.springframework.boot.testcontainers.service.connection.ServiceConnect
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -17,7 +22,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@Transactional
 abstract class IntegrationTestBase {
 
     @ServiceConnection
@@ -32,6 +36,30 @@ abstract class IntegrationTestBase {
 
     @Autowired
     protected ObjectMapper objectMapper;
+
+    @Autowired
+    private SpringDataItemCardapioRepository itemCardapioRepository;
+
+    @Autowired
+    private SpringDataRestauranteRepository restauranteRepository;
+
+    @Autowired
+    private SpringDataUserRepository userRepository;
+
+    @Autowired
+    private SpringDataEnderecoRepository enderecoRepository;
+
+    @Autowired
+    private SpringDataTipoUsuarioRepository tipoUsuarioRepository;
+
+    @BeforeEach
+    void limparBanco() {
+        itemCardapioRepository.deleteAll();
+        restauranteRepository.deleteAll();
+        userRepository.deleteAll();
+        enderecoRepository.deleteAll();
+        tipoUsuarioRepository.deleteAll();
+    }
 
     protected long criarTipoUsuario(String nome) throws Exception {
         String body = mockMvc.perform(post("/api/tipos-usuario")
