@@ -18,6 +18,12 @@ O objetivo é disponibilizar uma API backend para apoiar a gestão de restaurant
 - Associar itens do cardápio a restaurantes.
 - Consultar e testar os endpoints.
 
+## Vídeo de apresentação
+
+O vídeo de apresentação do projeto está disponível no YouTube e demonstra a API em funcionamento, incluindo a estrutura do projeto, arquitetura em camadas, execução com Docker e PostgreSQL, documentação via Swagger/OpenAPI, uso da Collection do Postman, execução dos principais endpoints e testes automatizados.
+
+Link do vídeo: https://www.youtube.com/watch?v=3JIc63b9E7s
+
 ## Tecnologias utilizadas
 
 - Java 21
