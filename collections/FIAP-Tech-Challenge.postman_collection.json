@@ -1,0 +1,719 @@
+{
+  "info": {
+    "_postman_id": "9c0d2f57-66a2-4f4b-a6fe-3ccfa03f1f00",
+    "name": "FIAP Tech Challenge Fase 2",
+    "description": "Collection para testar os endpoints da API do projeto FIAP Tech Challenge Fase 2.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "tipoUsuarioId",
+      "value": "1"
+    },
+    {
+      "key": "enderecoId",
+      "value": "1"
+    },
+    {
+      "key": "userId",
+      "value": "1"
+    },
+    {
+      "key": "restauranteId",
+      "value": "1"
+    },
+    {
+      "key": "itemCardapioId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "GET Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "health"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tipos de Usuario",
+      "item": [
+        {
+          "name": "POST Criar Tipo Usuario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body && body.id) pm.collectionVariables.set('tipoUsuarioId', String(body.id));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Cliente\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tipos-usuario",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tipos-usuario"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Listar Tipos Usuario",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/tipos-usuario",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tipos-usuario"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Buscar Tipo Usuario por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/tipos-usuario/{{tipoUsuarioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tipos-usuario",
+                "{{tipoUsuarioId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT Atualizar Tipo Usuario",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Dono Restaurante\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tipos-usuario/{{tipoUsuarioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tipos-usuario",
+                "{{tipoUsuarioId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE Tipo Usuario",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/tipos-usuario/{{tipoUsuarioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tipos-usuario",
+                "{{tipoUsuarioId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Enderecos",
+      "item": [
+        {
+          "name": "POST Criar Endereco",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body && body.id) pm.collectionVariables.set('enderecoId', String(body.id));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rua\": \"Rua A\",\n  \"numero\": \"123\",\n  \"cidade\": \"Sao Paulo\",\n  \"cep\": \"01000-000\",\n  \"complemento\": \"Apto 12\",\n  \"estado\": \"SP\",\n  \"bairro\": \"Centro\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/enderecos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enderecos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Listar Enderecos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/enderecos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enderecos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Buscar Endereco por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/enderecos/{{enderecoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enderecos",
+                "{{enderecoId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT Atualizar Endereco",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rua\": \"Rua B\",\n  \"numero\": \"456\",\n  \"cidade\": \"Sao Paulo\",\n  \"cep\": \"01100-000\",\n  \"complemento\": \"Casa\",\n  \"estado\": \"SP\",\n  \"bairro\": \"Bela Vista\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/enderecos/{{enderecoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enderecos",
+                "{{enderecoId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE Endereco",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/enderecos/{{enderecoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enderecos",
+                "{{enderecoId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "POST Criar User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body && body.id) pm.collectionVariables.set('userId', String(body.id));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Maria Silva\",\n  \"email\": \"maria.silva@email.com\",\n  \"login\": \"maria.silva\",\n  \"senha\": \"123456\",\n  \"fkTipoUsuario\": {{tipoUsuarioId}},\n  \"enderecoId\": {{enderecoId}}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Listar Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Buscar User por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT Atualizar User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Maria da Silva\",\n  \"email\": \"maria.silva@email.com\",\n  \"login\": \"maria.silva\",\n  \"senha\": \"123456\",\n  \"fkTipoUsuario\": {{tipoUsuarioId}},\n  \"enderecoId\": {{enderecoId}}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Restaurantes",
+      "item": [
+        {
+          "name": "POST Criar Restaurante",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body && body.id) pm.collectionVariables.set('restauranteId', String(body.id));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Cantina Central\",\n  \"tipoCozinha\": \"Italiana\",\n  \"horarioFuncionamento\": \"09:00-22:00\",\n  \"donoId\": {{userId}},\n  \"enderecoId\": {{enderecoId}}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/restaurantes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "restaurantes"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Listar Restaurantes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/restaurantes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "restaurantes"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Listar Restaurantes por Dono",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/restaurantes?donoId={{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "restaurantes"
+              ],
+              "query": [
+                {
+                  "key": "donoId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Buscar Restaurante por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/restaurantes/{{restauranteId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "restaurantes",
+                "{{restauranteId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT Atualizar Restaurante",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Cantina Central Premium\",\n  \"tipoCozinha\": \"Italiana\",\n  \"horarioFuncionamento\": \"10:00-23:00\",\n  \"donoId\": {{userId}},\n  \"enderecoId\": {{enderecoId}}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/restaurantes/{{restauranteId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "restaurantes",
+                "{{restauranteId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE Restaurante",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/restaurantes/{{restauranteId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "restaurantes",
+                "{{restauranteId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Itens Cardapio",
+      "item": [
+        {
+          "name": "POST Criar Item Cardapio",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body && body.id) pm.collectionVariables.set('itemCardapioId', String(body.id));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Pizza Margherita\",\n  \"descricao\": \"Pizza tradicional com tomate e manjericao\",\n  \"preco\": 59.90,\n  \"disponivelLocal\": true,\n  \"caminhoFoto\": \"/fotos/pizza-margherita.jpg\",\n  \"restauranteId\": {{restauranteId}}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/itens-cardapio",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "itens-cardapio"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Listar Itens Cardapio",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/itens-cardapio",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "itens-cardapio"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Listar Itens por Restaurante",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/itens-cardapio?restauranteId={{restauranteId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "itens-cardapio"
+              ],
+              "query": [
+                {
+                  "key": "restauranteId",
+                  "value": "{{restauranteId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Buscar Item Cardapio por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/itens-cardapio/{{itemCardapioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "itens-cardapio",
+                "{{itemCardapioId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT Atualizar Item Cardapio",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Pizza Margherita Grande\",\n  \"descricao\": \"Pizza tradicional tamanho grande\",\n  \"preco\": 69.90,\n  \"disponivelLocal\": false,\n  \"caminhoFoto\": \"/fotos/pizza-margherita-grande.jpg\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/itens-cardapio/{{itemCardapioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "itens-cardapio",
+                "{{itemCardapioId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE Item Cardapio",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/itens-cardapio/{{itemCardapioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "itens-cardapio",
+                "{{itemCardapioId}}"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
